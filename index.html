@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>7 Mile/Conant Multigenerational Community Action Plan</title>
+<title>7 Mile/Conant Community Action Plan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
@@ -77,11 +77,17 @@
   .howto-card p{margin:0; font-size:.92rem; color:#4a4941;}
   @media (max-width:820px){ .howto-grid{grid-template-columns:1fr;} }
 
-  /* focus area jump nav */
-  .jumpnav{background:var(--sage); border-bottom:1px solid var(--line); padding:18px 0;}
-  .jumpnav .wrap{display:flex; gap:14px; flex-wrap:wrap; align-items:center;}
-  .jumpnav span.label{font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--wsu-green-dark);}
-  .jumpnav a{font-size:.86rem; font-weight:700; color:var(--wsu-green-dark); text-decoration:none; border-bottom:2px solid var(--wsu-gold); padding-bottom:2px;}
+  /* focus area jump nav / tabs */
+  .jumpnav{background:var(--sage); border-bottom:1px solid var(--line); padding:18px 0; position:sticky; top:63px; z-index:40;}
+  .jumpnav .wrap{display:flex; gap:8px; flex-wrap:wrap; align-items:center;}
+  .jumpnav span.label{font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--wsu-green-dark); margin-right:6px;}
+  .jumpnav a{font-size:.86rem; font-weight:700; color:var(--wsu-green-dark); text-decoration:none; padding:8px 14px; border-radius:20px; border:2px solid transparent;}
+  .jumpnav a:hover{border-color:var(--line);}
+  .jumpnav a.active{background:var(--wsu-green-dark); color:#fff;}
+  .navlinks a.active{border-bottom:2px solid var(--wsu-gold);}
+
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
 
   /* focus area sections */
   .focus-area{border-bottom:1px solid var(--line);}
@@ -106,6 +112,9 @@
   /* toolbox */
   .toolbox-label{display:flex; align-items:center; gap:10px; margin:8px 0 18px;}
   .toolbox-label .pill{background:var(--wsu-green-dark); color:var(--wsu-gold); font-size:.68rem; font-weight:900; text-transform:uppercase; letter-spacing:.1em; padding:5px 12px; border-radius:20px;}
+  .toolbox-subhead{font-size:.8rem; font-weight:900; text-transform:uppercase; letter-spacing:.06em; color:var(--wsu-green); margin:30px 0 14px; padding-top:14px; border-top:1px dashed var(--line);}
+  .toolbox-subhead:first-of-type{margin-top:6px; padding-top:0; border-top:none;}
+  .tool-card .status{display:inline-block; font-size:.72rem; font-style:italic; color:var(--warm-gray); margin-top:6px;}
   .toolbox-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:18px;}
   .tool-card{border:1px solid var(--line); border-radius:6px; padding:20px; background:var(--sage);}
   .tool-card .tag{font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--wsu-green);}
@@ -154,10 +163,6 @@
     <button class="navtoggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
     <ul class="navlinks" id="navLinks">
       <li><a href="#how-to-use">How to Use This Plan</a></li>
-      <li><a href="#housing">Housing</a></li>
-      <li><a href="#commercial">Commercial Corridor</a></li>
-      <li><a href="#blight">Blight &amp; Beautification</a></li>
-      <li><a href="#resources">Resource Library</a></li>
     </ul>
   </div>
 </nav>
@@ -180,11 +185,11 @@
   </svg>
   <div class="wrap">
     <span class="hero-tag">7 Mile / Conant Corridor &middot; Detroit, Michigan</span>
-    <h1>7 Mile/Conant Multigenerational Community Action Plan</h1>
+    <h1>7 Mile/Conant Community Action Plan</h1>
     <p class="lede">Concrete recommendations and ready-to-use resources for housing, commercial corridor revitalization, and blight reduction &mdash; developed with Solomon Community Development Corporation and the Wayne State University Master of Urban Planning program.</p>
     <div class="btnrow">
-      <a href="#housing" class="btn btn-gold">Explore the Action Plan</a>
-      <a href="#resources" class="btn btn-outline">Jump to Resource Library</a>
+      <a href="#housing" data-tab="housing" class="btn btn-gold">Explore the Action Plan</a>
+      <a href="#resources" data-tab="resources" class="btn btn-outline">Jump to Resource Library</a>
     </div>
   </div>
 </header>
@@ -216,18 +221,18 @@
   </div>
 </section>
 
-<div class="jumpnav">
+<div class="jumpnav" id="tabbar">
   <div class="wrap">
-    <span class="label">Jump to:</span>
-    <a href="#housing">Housing</a>
-    <a href="#commercial">Commercial Corridor</a>
-    <a href="#blight">Blight &amp; Beautification</a>
-    <a href="#resources">Resource Library</a>
+    <span class="label">Sections:</span>
+    <a href="#housing" data-tab="housing" class="active">Housing</a>
+    <a href="#commercial" data-tab="commercial">Commercial Corridor</a>
+    <a href="#blight" data-tab="blight">Blight &amp; Beautification</a>
+    <a href="#resources" data-tab="resources">Resource Library</a>
   </div>
 </div>
 
 <!-- ============ FOCUS AREA 1: HOUSING ============ -->
-<section class="focus-area" id="housing">
+<section class="focus-area tab-panel active" id="housing">
   <div class="wrap">
     <div class="fa-head">
       <div class="fa-icon">
@@ -235,48 +240,232 @@
       </div>
       <div class="fa-title">
         <span class="eyebrow">Focus Area 01</span>
-        <h2>Multifamily Housing Rehabilitation &amp; Development</h2>
+        <h2>Housing Preservation &amp; Vacant Land Opportunity</h2>
       </div>
     </div>
-    <p class="fa-overview"><span class="placeholder">[2&ndash;3 sentence overview: current condition of multifamily housing stock in the corridor, why it matters across generations, and what residents told us. Pull from your existing conditions research.]</span></p>
+    <p class="fa-overview">The study area is overwhelmingly single-family detached housing (90%, vs. two-thirds citywide) in Conant Gardens, historically one of Detroit's most prominent Black homeownership neighborhoods. Homeownership and long-term tenure are high &mdash; over 60% of homeowners have lived in their home since 2010 &mdash; and multigenerational households, including grandparents as primary caregivers, exceed citywide rates. Housing quality is generally stable but uneven: renter-occupied units in two tracts show sharply elevated rates of inadequate plumbing, and roughly 112 acres of vacant land (a third of it land bank&ndash;owned) interrupt otherwise stable blocks, including the 7-acre former Mason Elementary School site.</p>
 
     <div class="fa-columns">
       <div class="goalbox">
         <h3>Goals</h3>
         <ul>
-          <li><span class="placeholder">[Goal 1 &mdash; e.g., stabilize existing multifamily buildings currently at risk of disinvestment]</span></li>
-          <li><span class="placeholder">[Goal 2 &mdash; e.g., increase housing options that serve multiple generations of the same family]</span></li>
-          <li><span class="placeholder">[Goal 3]</span></li>
+          <li>Help legacy homeowners maintain and repair their homes, targeting the exterior and structural issues (roofs, porches, windows) most linked to cost rather than neglect.</li>
+          <li>Close the housing quality gap for renters, particularly the concentrated inadequate-plumbing conditions in census tracts 5071 and 5073.</li>
+          <li>Convert vacant parcels and structures &mdash; including the former Mason Elementary site &mdash; into housing and community assets instead of blight.</li>
+          <li>Lower the barriers (cost, zoning, information) to small-scale infill housing that fits the neighborhood's single-family character.</li>
         </ul>
       </div>
       <div class="stratbox">
         <h3>Strategies</h3>
         <ol>
-          <li><strong><span class="placeholder">[Strategy 1 title]</span></strong><span><span class="placeholder">One-line description of the recommendation and who leads it.</span></span></li>
-          <li><strong><span class="placeholder">[Strategy 2 title]</span></strong><span><span class="placeholder">One-line description.</span></span></li>
-          <li><strong><span class="placeholder">[Strategy 3 title]</span></strong><span><span class="placeholder">One-line description.</span></span></li>
+          <li><strong>Legacy Homeowner Repair &amp; Rehab Assistance</strong><span>Target funding and CDC advocacy toward exterior repairs &mdash; roofs, porches, windows, facades &mdash; for long-term homeowners, since deferred maintenance was observed even on occupied, cared-for homes.</span></li>
+          <li><strong>Renter Housing Quality Intervention</strong><span>Pursue code enforcement or incentive-based programs addressing inadequate plumbing in tracts 5071 (16%) and 5073 (40%), where the burden falls almost entirely on renters (80%+ of affected units).</span></li>
+          <li><strong>Land Bank Activation Toolkit for Residents</strong><span>Give residents and block clubs a simple guide to acquiring side lots, turning them into gardens or gathering space, and reporting dumping or maintenance issues through Improve Detroit.</span></li>
+          <li><strong>Support the Mason Elementary Redevelopment</strong><span>Back Solomon Village CDC's proposed senior housing and townhome development on the 7-acre former school site as a neighborhood anchor, leveraging the spillover investment senior housing typically generates.</span></li>
+          <li><strong>Missing Middle Infill on Scattered Vacant Lots</strong><span>Identify vacant lots suited to small-scale duplex, triplex, or quadplex infill, and pair this with a resident-facing walkthrough of the City's rezoning process for parcels that need it.</span></li>
         </ol>
       </div>
     </div>
+    <p class="editnote">Drafted from the Phase 2 housing report (census data, site visits, and community engagement) &mdash; confirm framing with your group before finalizing.</p>
 
     <div class="toolbox-label"><span class="pill">Toolbox</span><span class="editnote">Resources supporting the strategies above</span></div>
+    <div class="toolbox-subhead">Repair &amp; Rehab Funding</div>
     <div class="toolbox-grid">
       <div class="tool-card">
-        <span class="tag">Funding</span>
-        <h4><span class="placeholder">[Program name, e.g., MSHDA rehab program]</span></h4>
-        <p><span class="placeholder">Who it's for and what it funds, in one or two sentences.</span></p>
+        <span class="tag">Loan</span>
+        <h4>Detroit 0% Interest Home Repair Loan Program</h4>
+        <p>Interest-free, 10-year loans of $5,000&ndash;$25,000 for owner-occupants (6+ months). Covers roofs, plumbing, electrical, windows/doors, structural repairs. Min. credit score 560.</p>
         <a href="#" class="link">Add link &rarr;</a>
       </div>
       <div class="tool-card">
-        <span class="tag">Case Study</span>
-        <h4><span class="placeholder">[Comparable project name]</span></h4>
-        <p><span class="placeholder">Why this example is relevant to the corridor.</span></p>
+        <span class="tag">Program</span>
+        <h4>Critical Home Repair Program</h4>
+        <p>City of Detroit funding for urgent health/safety repairs &mdash; severe plumbing, active roof leaks, broken furnaces, accessibility improvements &mdash; for low-income homeowners.</p>
+        <span class="status">Notes conflict on status (closed pre-application vs. active) &mdash; confirm before referring residents.</span>
+        <a href="https://detroitmi.gov/departments/housing-and-revitalization-department/homeowners/critical-home-repair-program" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Program</span>
+        <h4>Renew Detroit Home Repair Program</h4>
+        <p>Two-phase essential repair program specifically for senior and disabled Detroit homeowners, created by the Mayor's Office.</p>
+        <a href="https://detroitmi.gov/government/mayors-office/renew-detroit-home-repair-program" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Fund</span>
+        <h4>Detroit Home Repair Fund</h4>
+        <p>Administered by Enterprise Community Partners &mdash; flexible funding for critical health/safety repairs for lower-income Detroit homeowners.</p>
+        <a href="https://www.enterprisecommunity.org/impact-areas/preservation-and-production/detroit-home-repair-fund" class="link" target="_blank" rel="noopener">enterprisecommunity.org &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Program</span>
+        <h4>Detroit LeadSafe Housing Program</h4>
+        <p>Lead hazard remediation program. General pre-application is closed, but households with a child with an elevated blood lead level can request priority assistance.</p>
+        <a href="https://detroitmi.gov/departments/detroit-leadsafe-housing" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Nonprofit</span>
+        <h4>Central Detroit Christian &mdash; Housing Development</h4>
+        <p>Partners with nonprofits to provide minor home repairs and cleaning services as funding allows. 313-873-0064.</p>
+        <a href="https://www.centraldetroitchristian.org/" class="link" target="_blank" rel="noopener">centraldetroitchristian.org &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Program</span>
+        <h4>CDBG-DR Private Sewer Repair Program</h4>
+        <p>HUD-funded repair of private sewer lines damaged in the June 2021 flooding, reducing basement backups. Covers District 3, including Conant Gardens and Pershing.</p>
+        <a href="#" class="link">Add link &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Program</span>
+        <h4>Home Weatherization Assistance (Wayne Metro)</h4>
+        <p>Free energy-efficiency upgrades &mdash; insulation, air sealing, smoke/CO detectors. Typically saves $250&ndash;$450/year. Does not cover structural, plumbing, or electrical repairs. (313) 889-9799.</p>
+        <a href="https://www.waynemetro.org/weatherization/#requirements" class="link" target="_blank" rel="noopener">waynemetro.org &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Rebate</span>
+        <h4>Michigan Home Energy Rebates (MIHER)</h4>
+        <p>Federal (IRA-funded) rebates for home efficiency and electrification upgrades. New Detroit District applications are temporarily paused pending funding review. 855-510-7080.</p>
+        <a href="https://mienergyrebates.clearesult.com/prequalificationapps/prequalification/v2" class="link" target="_blank" rel="noopener">mienergyrebates.clearesult.com &rarr;</a>
+      </div>
+    </div>
+
+    <div class="toolbox-subhead">Homeownership, Down Payment &amp; Foreclosure Prevention</div>
+    <div class="toolbox-grid">
+      <div class="tool-card">
+        <span class="tag">Program</span>
+        <h4>Make It Home (MIH)</h4>
+        <p>Through UCHC, helps tenants and former homeowners buy back their tax-foreclosed home before auction, preventing displacement. Hotline: (313) 725-4560.</p>
+        <a href="https://www.uchcdetroit.org/what-we-do/foreclosure-prevention/makeithome" class="link" target="_blank" rel="noopener">uchcdetroit.org &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Grant</span>
+        <h4>Detroit Down Payment Assistance</h4>
+        <p>Up to $25,000 toward down payment, closing costs, or principal reduction for qualifying first-time-in-3-years buyers (household income &le;80% AMI). Application help: National Faith Homebuyers, (313) 255-9500.</p>
+        <a href="https://nationalfaith.org/" class="link" target="_blank" rel="noopener">nationalfaith.org &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Statewide</span>
+        <h4>MSHDA Down Payment Assistance</h4>
+        <p>MI Home Loan Mortgage, MI 10K DPA, and homebuyer education for preparing and sustaining homeownership.</p>
+        <a href="https://www.michigan.gov/mshda/Homeownership" class="link" target="_blank" rel="noopener">michigan.gov/mshda &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Program</span>
+        <h4>Detroit Housing Commission Homeownership Programs</h4>
+        <p>HUD-assisted homeownership vouchers helping low-income Detroit residents transition from renting to owning.</p>
+        <a href="https://www.dhcmi.org" class="link" target="_blank" rel="noopener">dhcmi.org &rarr;</a>
+      </div>
+    </div>
+
+    <div class="toolbox-subhead">Renter Support &amp; Tenant Rights</div>
+    <div class="toolbox-grid">
+      <div class="tool-card">
+        <span class="tag">Education</span>
+        <h4>Housing Counseling &amp; Classes (Wayne Metro)</h4>
+        <p>HUD-certified counseling plus Renting Right, The Homebuyer Club, Foundations of Wealth Building, and Maintaining the Dream to Keep My Home webinars.</p>
+        <a href="https://www.waynemetro.org/housing/" class="link" target="_blank" rel="noopener">waynemetro.org &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Legal</span>
+        <h4>Right to Counsel / Office of Eviction Defense</h4>
+        <p>Free legal representation at 36th District Court for income-qualifying tenants facing eviction (up to 2x federal poverty level).</p>
+        <a href="https://detroitmi.gov/departments/law-department/office-eviction-defense-right-counsel" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Rights</span>
+        <h4>Fair Housing &amp; Accessibility Rights</h4>
+        <p>Support for renters with disabilities requesting reasonable accommodations, and for filing housing discrimination complaints. Fair Housing Center of Metro Detroit: 313-579-FAIR.</p>
         <a href="#" class="link">Add link &rarr;</a>
       </div>
       <div class="tool-card">
         <span class="tag">Contact</span>
-        <h4><span class="placeholder">[Organization or agency]</span></h4>
-        <p><span class="placeholder">What they can help with.</span></p>
+        <h4>BSEED Property Maintenance / Tenant Help</h4>
+        <p>Report landlord code violations and maintenance complaints. (313) 628-2451 / pm@detroitmi.gov.</p>
+        <a href="https://app.smartsheet.com/b/form/efa41296fdc646dcadc3cbca2d6fd6ac" class="link" target="_blank" rel="noopener">Complaint form &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Helpline</span>
+        <h4>Detroit Housing Resource HelpLine</h4>
+        <p>Central line for landlord/tenant issues, housing discrimination, evictions, relocation, and emergency shelter assistance. 866-313-2520.</p>
+        <a href="#" class="link">Add link &rarr;</a>
+      </div>
+    </div>
+
+    <div class="toolbox-subhead">Property Tax, Senior &amp; Disability Support</div>
+    <div class="toolbox-grid">
+      <div class="tool-card">
+        <span class="tag">Exemption</span>
+        <h4>Homeowners Property Tax Exemption (HOPE)</h4>
+        <p>Up to 100% property tax exemption based on income/circumstances. 2026 deadline: November 6, 2026, 4:30 PM.</p>
+        <a href="https://detroitmi.gov/government/mayors-office/chief-financial-officer/homeowners-property-exemption-hope" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Appeal</span>
+        <h4>Property Tax Assessment Appeal</h4>
+        <p>Step-by-step guide for homeowners who want to appeal their property's assessed value.</p>
+        <a href="https://detroitmi.gov/Portals/0/docs/Property%20Assessment/How%20to%20Appeal%20Your%20Assessment.pdf" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Exemption</span>
+        <h4>Disabled Veterans Property Tax Exemption</h4>
+        <p>Disabled veterans (or unremarried surviving spouse) file Form 5107 with the City Assessor's Office.</p>
+        <a href="https://detroitmi.gov/sites/detroitmi.localhost/files/forms/2025-08/Form%205107%20-%20Affidavit%20for%20Disabled%20Veterans%20Exemption_rev%201124.pdf" class="link" target="_blank" rel="noopener">Form 5107 &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Discount</span>
+        <h4>Senior Citizen Solid Waste Discount</h4>
+        <p>Garbage fee discount for homeowners 65+ with a Principal Residence Exemption on file. Apply July 1&ndash;Sept 15. (313) 224-1219.</p>
+        <a href="#" class="link">Add link &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Program</span>
+        <h4>MI Choice Waiver (Detroit Area Agency on Aging)</h4>
+        <p>Medicaid-funded home and community-based care, including home repair services, for eligible seniors (60+) and residents with disabilities. (313) 446-4444.</p>
+        <a href="https://www.detroitseniorsolution.org/" class="link" target="_blank" rel="noopener">detroitseniorsolution.org &rarr;</a>
+      </div>
+    </div>
+
+    <div class="toolbox-subhead">Report an Issue &amp; Neighborhood Tools</div>
+    <div class="toolbox-grid">
+      <div class="tool-card">
+        <span class="tag">Report</span>
+        <h4>Improve Detroit</h4>
+        <p>Report potholes, illegal dumping, vacant structure issues, and other quality-of-life concerns with photo upload and status tracking.</p>
+        <a href="https://detroitmi.gov/webapp/improve-detroit-report-issue-online" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Report</span>
+        <h4>Report Illegal Dumping</h4>
+        <p>Three ways to report: Improve Detroit app, Telephone Crime Report Unit (313-267-4600), or in person at a DPD precinct. Free legal bulk drop-off at DPW Southfield, Davison, and J. Fons yards.</p>
+        <a href="#" class="link">Add link &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Report</span>
+        <h4>Detroit Animal Control</h4>
+        <p>Report stray or at-large animals, 7 days/week 7am&ndash;7pm. (313) 922-DOGS.</p>
+        <a href="https://app.smartsheet.com/b/form/fedfa0caba7144aaa7165d9226e33606" class="link" target="_blank" rel="noopener">Report online &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Tool Library</span>
+        <h4>Carhartt Workshop Tool Bench</h4>
+        <p>Free tool lending library for Detroit residents tackling their own repairs or landscaping projects.</p>
+        <a href="https://carharttworkshop.myturn.com/library/" class="link" target="_blank" rel="noopener">carharttworkshop.myturn.com &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Program</span>
+        <h4>Detroit Land Bank Authority &mdash; Side Lot &amp; Property Acquisition</h4>
+        <p>The Land Bank owns roughly a third of vacant parcels in the study area (208 of 621). Residents can acquire side lots for gardens, greenspace, or gathering areas.</p>
+        <a href="#" class="link">Add link &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Contact</span>
+        <h4>Detroit City Planning Commission &mdash; Rezoning</h4>
+        <p>For residents or developers pursuing rezoning on vacant lots: request a pre-application meeting at cpc@detroitmi.gov or 313-224-6225.</p>
+        <a href="#" class="link">Add link &rarr;</a>
+      </div>
+      <div class="tool-card">
+        <span class="tag">Case Study</span>
+        <h4>Solomon Village CDC &mdash; Mason Elementary Redevelopment</h4>
+        <p>Proposed senior housing and townhome development on the 7-acre former Mason Elementary site &mdash; a model for turning a long-vacant anchor parcel into housing.</p>
         <a href="#" class="link">Add link &rarr;</a>
       </div>
       <div class="tool-card addcard">+ Add another resource</div>
@@ -285,7 +474,7 @@
 </section>
 
 <!-- ============ FOCUS AREA 2: COMMERCIAL CORRIDOR ============ -->
-<section class="focus-area" id="commercial">
+<section class="focus-area tab-panel" id="commercial">
   <div class="wrap">
     <div class="fa-head">
       <div class="fa-icon">
@@ -296,26 +485,27 @@
         <h2>Commercial Corridor Revitalization</h2>
       </div>
     </div>
-    <p class="fa-overview"><span class="placeholder">[2&ndash;3 sentence overview: current state of the commercial corridor, vacancy/business mix, and what residents said they want to see there.]</span></p>
+    <p class="fa-overview">Everyday commercial amenities in the corridor are smaller in scale &mdash; a grocery store, laundromat, urgent care, car repair &mdash; alongside noticeable storefront vacancy. A business survey was administered along 7 Mile during site visits, though response was limited. At the Community Input Meeting, residents were consistent about what they want to see more of: sit-down restaurants, coffee shops, medical services, family-friendly gathering spaces, entertainment options like a movie theater, and safer pedestrian connections between the corridor and nearby schools.</p>
 
     <div class="fa-columns">
       <div class="goalbox">
         <h3>Goals</h3>
         <ul>
-          <li><span class="placeholder">[Goal 1 &mdash; e.g., reduce storefront vacancy along the corridor]</span></li>
-          <li><span class="placeholder">[Goal 2 &mdash; e.g., support businesses that serve residents of all ages]</span></li>
-          <li><span class="placeholder">[Goal 3]</span></li>
+          <li>Reduce storefront vacancy and fill gaps in everyday and destination amenities residents identified (sit-down dining, coffee shops, medical services).</li>
+          <li>Create welcoming gathering spaces along the corridor that reflect the neighborhood's identity and support connection across generations.</li>
+          <li>Improve pedestrian access between the commercial corridor and nearby schools and residential blocks.</li>
         </ul>
       </div>
       <div class="stratbox">
         <h3>Strategies</h3>
         <ol>
-          <li><strong><span class="placeholder">[Strategy 1 title]</span></strong><span><span class="placeholder">One-line description.</span></span></li>
-          <li><strong><span class="placeholder">[Strategy 2 title]</span></strong><span><span class="placeholder">One-line description.</span></span></li>
-          <li><strong><span class="placeholder">[Strategy 3 title]</span></strong><span><span class="placeholder">One-line description.</span></span></li>
+          <li><strong><span class="placeholder">[Strategy 1 title]</span></strong><span><span class="placeholder">One-line description &mdash; e.g., a facade/small business grant program targeted at priority vacancies.</span></span></li>
+          <li><strong><span class="placeholder">[Strategy 2 title]</span></strong><span><span class="placeholder">One-line description &mdash; e.g., business recruitment strategy for the specific amenities residents asked for.</span></span></li>
+          <li><strong><span class="placeholder">[Strategy 3 title]</span></strong><span><span class="placeholder">One-line description &mdash; e.g., pedestrian/crosswalk improvements linking the corridor to Pershing High School.</span></span></li>
         </ol>
       </div>
     </div>
+    <p class="editnote">Overview and goals drafted from the June 30 Community Input Meeting and business survey effort &mdash; strategies still need your group's specific recommendations, since this report captures resident priorities but not the proposed interventions.</p>
 
     <div class="toolbox-label"><span class="pill">Toolbox</span><span class="editnote">Resources supporting the strategies above</span></div>
     <div class="toolbox-grid">
@@ -343,7 +533,7 @@
 </section>
 
 <!-- ============ FOCUS AREA 3: BLIGHT & BEAUTIFICATION ============ -->
-<section class="focus-area" id="blight">
+<section class="focus-area tab-panel" id="blight">
   <div class="wrap">
     <div class="fa-head">
       <div class="fa-icon">
@@ -354,26 +544,28 @@
         <h2>Blight Reduction &amp; Beautification</h2>
       </div>
     </div>
-    <p class="fa-overview"><span class="placeholder">[2&ndash;3 sentence overview: extent and location of vacant/blighted properties, and what residents said about safety, upkeep, or reuse ideas.]</span></p>
+    <p class="fa-overview">Conditions range widely across the study area &mdash; from severely blighted, boarded homes that have become targets for illegal dumping, to well-kept homes with only minor needs. Residents raised concerns about flooding, limited street lighting, and a lack of greenspace for children, along with a desire for stronger property maintenance standards so that all property owners are held to the same upkeep expectations. Participants also envisioned a stronger tree canopy and more inviting gardens and parks as part of daily life in the neighborhood.</p>
 
     <div class="fa-columns">
       <div class="goalbox">
         <h3>Goals</h3>
         <ul>
-          <li><span class="placeholder">[Goal 1 &mdash; e.g., reduce the number of long-term vacant parcels]</span></li>
-          <li><span class="placeholder">[Goal 2 &mdash; e.g., turn vacant lots into resident-supported uses]</span></li>
-          <li><span class="placeholder">[Goal 3]</span></li>
+          <li>Reduce the number of severely blighted, boarded structures that attract illegal dumping.</li>
+          <li>Address resident safety concerns tied to flooding and inadequate street lighting.</li>
+          <li>Expand tree canopy, greenspace, and parks so children and families have places to gather outdoors.</li>
+          <li>Strengthen enforcement of property maintenance standards across the neighborhood.</li>
         </ul>
       </div>
       <div class="stratbox">
         <h3>Strategies</h3>
         <ol>
-          <li><strong><span class="placeholder">[Strategy 1 title]</span></strong><span><span class="placeholder">One-line description.</span></span></li>
-          <li><strong><span class="placeholder">[Strategy 2 title]</span></strong><span><span class="placeholder">One-line description.</span></span></li>
-          <li><strong><span class="placeholder">[Strategy 3 title]</span></strong><span><span class="placeholder">One-line description.</span></span></li>
+          <li><strong><span class="placeholder">[Strategy 1 title]</span></strong><span><span class="placeholder">One-line description &mdash; e.g., partner with the Detroit Land Bank on priority demolition/side lot conversion for the most severely blighted parcels.</span></span></li>
+          <li><strong><span class="placeholder">[Strategy 2 title]</span></strong><span><span class="placeholder">One-line description &mdash; e.g., a street lighting improvement request tied to specific blocks residents flagged.</span></span></li>
+          <li><strong><span class="placeholder">[Strategy 3 title]</span></strong><span><span class="placeholder">One-line description &mdash; e.g., a tree canopy / greenspace planting initiative in partnership with a local nonprofit.</span></span></li>
         </ol>
       </div>
     </div>
+    <p class="editnote">Overview and goals drafted from site visit observations and the June 30 Community Input Meeting &mdash; strategies still need your group's specific recommendations.</p>
 
     <div class="toolbox-label"><span class="pill">Toolbox</span><span class="editnote">Resources supporting the strategies above</span></div>
     <div class="toolbox-grid">
@@ -401,7 +593,7 @@
 </section>
 
 <!-- ============ GENERAL RESOURCE LIBRARY ============ -->
-<section class="resources" id="resources">
+<section class="resources tab-panel" id="resources">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow on-dark">Resource library</span>
@@ -439,16 +631,12 @@
       <h4>About this plan</h4>
       <p>Produced by Master of Urban Planning graduate students at Wayne State University, in partnership with Solomon Community Development Corporation.</p>
     </div>
-    <div class="names">
-      Kelsey &middot; Chaleah Ward &middot; Michelle Strick<br>
-      Lindsay Pfirrmann &middot; Alexis Mohney &middot; Detricia Talley
-    </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <span><strong>7 Mile/Conant Multigenerational Community Action Plan</strong> &middot; Wayne State University Master of Urban Planning capstone</span>
+    <span><strong>7 Mile/Conant Community Action Plan</strong> &middot; Wayne State University Master of Urban Planning capstone</span>
     <span>In partnership with Solomon Community Development Corporation</span>
   </div>
 </footer>
@@ -457,7 +645,39 @@
   var toggle = document.getElementById('navToggle');
   var links = document.getElementById('navLinks');
   toggle.addEventListener('click', function(){ links.classList.toggle('open'); });
-  links.querySelectorAll('a').forEach(function(a){
+
+  var tabLinks = document.querySelectorAll('a[data-tab]');
+  var panels = document.querySelectorAll('.tab-panel');
+  var tabbar = document.getElementById('tabbar');
+
+  function showTab(id, doScroll){
+    panels.forEach(function(p){ p.classList.toggle('active', p.id === id); });
+    tabLinks.forEach(function(l){ l.classList.toggle('active', l.getAttribute('data-tab') === id); });
+    links.classList.remove('open');
+    if (doScroll && tabbar) {
+      var y = tabbar.getBoundingClientRect().top + window.pageYOffset - 60;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }
+
+  tabLinks.forEach(function(link){
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      var id = link.getAttribute('data-tab');
+      showTab(id, true);
+      try { history.replaceState(null, '', '#' + id); } catch (err) { /* ignore in sandboxed/preview contexts */ }
+    });
+  });
+
+  // Support deep-linking / reload on a specific tab
+  var initial = window.location.hash.replace('#', '');
+  var validTabs = ['housing', 'commercial', 'blight', 'resources'];
+  if (validTabs.indexOf(initial) !== -1) {
+    showTab(initial, false);
+  }
+
+  // Non-tab nav links (e.g. "How to Use This Plan") still close the mobile menu
+  links.querySelectorAll('a:not([data-tab])').forEach(function(a){
     a.addEventListener('click', function(){ links.classList.remove('open'); });
   });
 </script>
