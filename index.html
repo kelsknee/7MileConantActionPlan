@@ -145,7 +145,7 @@
 
   ::selection{background:var(--wsu-gold); color:var(--wsu-green-dark);}
 
-  .draft-banner{background:#b3261e; color:#fff; text-align:center; font-size:.85rem; font-weight:700; padding:10px 20px; letter-spacing:.01em;}
+  .draft-banner{background:#b3261e; color:#fff; text-align:center; font-size:.85rem; font-weight:700; padding:10px 20px; letter-spacing:.01em; position:sticky; top:0; z-index:60;}
   .draft-banner strong{text-transform:uppercase; letter-spacing:.06em; margin-right:6px;}
 </style>
 </head>
@@ -852,6 +852,16 @@
 <script>
   var toggle = document.getElementById('navToggle');
   var links = document.getElementById('navLinks');
+
+  // Keep the nav pinned directly below the sticky draft banner, even if the
+  // banner's text wraps to a second line on narrow screens.
+  var draftBanner = document.querySelector('.draft-banner');
+  var siteNav = document.querySelector('nav');
+  function positionNavBelowBanner(){
+    if (draftBanner && siteNav) { siteNav.style.top = draftBanner.offsetHeight + 'px'; }
+  }
+  positionNavBelowBanner();
+  window.addEventListener('resize', positionNavBelowBanner);
   toggle.addEventListener('click', function(){ links.classList.toggle('open'); });
 
   var tabLinks = document.querySelectorAll('a[data-tab]');
