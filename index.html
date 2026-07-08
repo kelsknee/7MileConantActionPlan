@@ -96,7 +96,10 @@
   .fa-title .eyebrow{margin-bottom:4px; display:block;}
   .fa-title h2{margin:0;}
   .fa-overview{max-width:760px; color:#3c3b36; margin:18px 0 34px; font-size:1rem;}
-  .fa-overview .placeholder{background:rgba(255,204,51,.25); padding:1px 5px; border-radius:3px;}
+  .placeholder{color:#b3261e; background:rgba(179,38,30,.08); padding:1px 5px; border-radius:3px; font-weight:700;}
+  .flag{color:#b3261e; font-weight:700;}
+  .tool-card .status{display:inline-block; font-size:.72rem; font-style:italic; color:#b3261e; margin-top:6px; font-weight:700;}
+  .tool-card a.link[href="#"]{color:#b3261e; border-bottom-color:#b3261e;}
 
   .fa-columns{display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-bottom:40px;}
   @media (max-width:900px){ .fa-columns{grid-template-columns:1fr;} }
@@ -119,7 +122,6 @@
   .toolbox-label .pill{background:var(--wsu-green-dark); color:var(--wsu-gold); font-size:.68rem; font-weight:900; text-transform:uppercase; letter-spacing:.1em; padding:5px 12px; border-radius:20px;}
   .toolbox-subhead{font-size:.8rem; font-weight:900; text-transform:uppercase; letter-spacing:.06em; color:var(--wsu-green); margin:30px 0 14px; padding-top:14px; border-top:1px dashed var(--line);}
   .toolbox-subhead:first-of-type{margin-top:6px; padding-top:0; border-top:none;}
-  .tool-card .status{display:inline-block; font-size:.72rem; font-style:italic; color:var(--warm-gray); margin-top:6px;}
   .toolbox-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:18px;}
   .tool-card{border:1px solid var(--line); border-radius:6px; padding:20px; background:var(--sage);}
   .tool-card .tag{font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--wsu-green);}
@@ -259,7 +261,7 @@
           <li>Lower the barriers (cost, zoning, information) to small-scale infill housing that fits the neighborhood's single-family character, by identifying vacant lots suited to duplex, triplex, or quadplex infill and pairing this with a resident-facing walkthrough of the City's rezoning process.</li>
         </ul>
       </div>
-      <p class="editnote">Drafted from the Phase 2 housing report (census data, site visits, and community engagement). We still need to confirm this framing as a group before finalizing.</p>
+      <p class="editnote">Drafted from the Phase 2 housing report (census data, site visits, and community engagement). <span class="flag">We still need to confirm this framing as a group before finalizing.</span></p>
     </div>
 
     <div class="subpanel" id="housing-toolbox" data-group="housing">
@@ -276,7 +278,7 @@
         <span class="tag">Program</span>
         <h4>Critical Home Repair Program</h4>
         <p>City of Detroit funding for urgent health/safety repairs, including severe plumbing, active roof leaks, broken furnaces, and accessibility improvements, for low-income homeowners.</p>
-        <span class="status">We found conflicting info on this program's status (closed pre-application vs. active) and still need to confirm before referring residents to it.</span>
+        <span class="status">Applications are currently closed for this program's pre-application period.</span>
         <a href="https://detroitmi.gov/departments/housing-and-revitalization-department/homeowners/critical-home-repair-program" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
       </div>
       <div class="tool-card">
@@ -451,12 +453,6 @@
         <p>For residents or developers pursuing rezoning on vacant lots: request a pre-application meeting at cpc@detroitmi.gov or 313-224-6225.</p>
         <a href="#" class="link">Add link &rarr;</a>
       </div>
-      <div class="tool-card">
-        <span class="tag">Case Study</span>
-        <h4>Solomon Village CDC: Mason Elementary Redevelopment</h4>
-        <p>Proposed senior housing and townhome development on the 7-acre former Mason Elementary site, a model for turning a long-vacant anchor parcel into housing.</p>
-        <a href="#" class="link">Add link &rarr;</a>
-      </div>
       <div class="tool-card addcard">+ Add another resource</div>
     </div>
     </div>
@@ -492,7 +488,7 @@
           <li>Follow a phased implementation: construction survival and business community building (Years 1&ndash;2, via a "7 Mile Merchants Committee" and connections to Motor City Match/Invest Detroit), corridor branding and marketing (Years 1&ndash;3, facade grants and business recruitment), and street signage and wayfinding (Years 3&ndash;6, gateway signage and light pole banners).</li>
         </ul>
       </div>
-      <p class="editnote">Goals drafted from the 7 Mile Corridor Action Plan outline (Dequindre to Ryan Rd) and the Business Improvement Zone recommendation. We still need to confirm timelines and sequencing as a group.</p>
+      <p class="editnote">Goals drafted from the 7 Mile Corridor Action Plan outline (Dequindre to Ryan Rd) and the Business Improvement Zone recommendation. <span class="flag">We still need to confirm timelines and sequencing as a group.</span></p>
     </div>
 
     <div class="subpanel" id="commercial-toolbox" data-group="commercial">
@@ -501,19 +497,13 @@
       <div class="tool-card">
         <span class="tag">Funding</span>
         <h4>Motor City Match / Invest Detroit</h4>
-        <p>Named as resources to help stabilize business cash flow during construction and support facade/business recruitment efforts. We still need to confirm current program details and eligibility.</p>
+        <p>Named as resources to help stabilize business cash flow during construction and support facade/business recruitment efforts. <span class="flag">We still need to confirm current program details and eligibility.</span></p>
         <a href="#" class="link">Add link &rarr;</a>
       </div>
       <div class="tool-card">
         <span class="tag">Contact</span>
         <h4>City of Detroit CRIO Department</h4>
         <p>Civil Rights, Inclusion &amp; Opportunity department; recommended monthly contact alongside DPW for construction updates to the 7 Mile Merchants Committee.</p>
-        <a href="#" class="link">Add link &rarr;</a>
-      </div>
-      <div class="tool-card">
-        <span class="tag">Template</span>
-        <h4><span class="placeholder">[Corridor business survey / vacancy tracker]</span></h4>
-        <p><span class="placeholder">What this template helps the CDC do.</span></p>
         <a href="#" class="link">Add link &rarr;</a>
       </div>
       <div class="tool-card">
@@ -533,7 +523,7 @@
   <div class="wrap">
     <div class="fa-head">
       <div class="fa-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L7 9h2.5L6 15h3.5L7 20h10l-2.5-5H18l-3.5-6H17L12 2z"/><line x1="12" y1="20" x2="12" y2="22"/></svg>
       </div>
       <div class="fa-title">
         <h2>Blight Reduction &amp; Beautification</h2>
@@ -557,7 +547,7 @@
           <li>Extend beautification investment to the residential blocks surrounding the proposed Mason Elementary senior complex and townhomes, helping legacy homeowners nearby keep pace with exterior upkeep via the repair programs detailed in the Housing tab.</li>
         </ul>
       </div>
-      <p class="editnote">Goals drafted from the neighborhood stabilization and beautification plan and the parks/code enforcement outline. We still need to fill in ticket volume and demolition figures from our data before this goes public.</p>
+      <p class="editnote">Goals drafted from the neighborhood stabilization and beautification plan and the parks/code enforcement outline. <span class="flag">We still need to fill in ticket volume and demolition figures from our data before this goes public.</span></p>
     </div>
 
     <div class="subpanel" id="blight-toolbox" data-group="blight">
@@ -586,12 +576,6 @@
         <h4>Department of Appeals and Hearings (DAH)</h4>
         <p>Where residents can appeal blight tickets and other code enforcement violations.</p>
         <a href="https://detroitmi.gov/departments/department-appeals-and-hearings" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
-      </div>
-      <div class="tool-card">
-        <span class="tag">Template</span>
-        <h4><span class="placeholder">[Vacant property / blight ticket tracking sheet]</span></h4>
-        <p><span class="placeholder">What this helps the CDC or block clubs do.</span></p>
-        <a href="#" class="link">Add link &rarr;</a>
       </div>
       <div class="tool-card addcard">+ Add another resource</div>
     </div>
@@ -623,7 +607,7 @@
           <span class="tag">Program</span>
           <h4>Critical Home Repair Program</h4>
           <p>City of Detroit funding for urgent health/safety repairs, including severe plumbing, active roof leaks, broken furnaces, and accessibility improvements, for low-income homeowners.</p>
-          <span class="status">We found conflicting info on this program's status (closed pre-application vs. active) and still need to confirm before referring residents to it.</span>
+          <span class="status">Applications are currently closed for this program's pre-application period.</span>
           <a href="https://detroitmi.gov/departments/housing-and-revitalization-department/homeowners/critical-home-repair-program" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
         </div>
         <div class="tool-card">
@@ -798,12 +782,6 @@
           <p>For residents or developers pursuing rezoning on vacant lots: request a pre-application meeting at cpc@detroitmi.gov or 313-224-6225.</p>
           <a href="#" class="link">Add link &rarr;</a>
         </div>
-        <div class="tool-card">
-          <span class="tag">Case Study</span>
-          <h4>Solomon Village CDC: Mason Elementary Redevelopment</h4>
-          <p>Proposed senior housing and townhome development on the 7-acre former Mason Elementary site, a model for turning a long-vacant anchor parcel into housing.</p>
-          <a href="#" class="link">Add link &rarr;</a>
-        </div>
       </div>
     </div>
 
@@ -813,19 +791,13 @@
         <div class="tool-card">
           <span class="tag">Funding</span>
           <h4>Motor City Match / Invest Detroit</h4>
-          <p>Named as resources to help stabilize business cash flow during construction and support facade/business recruitment efforts. We still need to confirm current program details and eligibility.</p>
+          <p>Named as resources to help stabilize business cash flow during construction and support facade/business recruitment efforts. <span class="flag">We still need to confirm current program details and eligibility.</span></p>
           <a href="#" class="link">Add link &rarr;</a>
         </div>
         <div class="tool-card">
           <span class="tag">Contact</span>
           <h4>City of Detroit CRIO Department</h4>
           <p>Civil Rights, Inclusion &amp; Opportunity department; recommended monthly contact alongside DPW for construction updates to the 7 Mile Merchants Committee.</p>
-          <a href="#" class="link">Add link &rarr;</a>
-        </div>
-        <div class="tool-card">
-          <span class="tag">Template</span>
-          <h4><span class="placeholder">[Corridor business survey / vacancy tracker]</span></h4>
-          <p><span class="placeholder">What this template helps the CDC do.</span></p>
           <a href="#" class="link">Add link &rarr;</a>
         </div>
         <div class="tool-card">
@@ -863,12 +835,6 @@
           <h4>Department of Appeals and Hearings (DAH)</h4>
           <p>Where residents can appeal blight tickets and other code enforcement violations.</p>
           <a href="https://detroitmi.gov/departments/department-appeals-and-hearings" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
-        </div>
-        <div class="tool-card">
-          <span class="tag">Template</span>
-          <h4><span class="placeholder">[Vacant property / blight ticket tracking sheet]</span></h4>
-          <p><span class="placeholder">What this helps the CDC or block clubs do.</span></p>
-          <a href="#" class="link">Add link &rarr;</a>
         </div>
       </div>
     </div>
