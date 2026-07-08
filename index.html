@@ -36,7 +36,7 @@
   nav{position:sticky; top:0; z-index:50; background:var(--cream); border-bottom:1px solid var(--line);}
   nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:14px; padding-bottom:14px; position:relative;}
   .brand{display:flex; align-items:center; gap:10px; font-weight:900; font-size:1rem; color:var(--wsu-green-dark);}
-  .brand .mark{width:34px; height:34px; border-radius:6px; background:var(--wsu-green); display:flex; align-items:center; justify-content:center; color:var(--wsu-gold); font-weight:900; font-size:1rem; flex-shrink:0;}
+  .brand .mark{width:34px; height:34px; flex-shrink:0; object-fit:contain;}
   .navlinks{display:flex; gap:18px; list-style:none; margin:0; padding:0; font-weight:700; font-size:.86rem;}
   .navlinks a{text-decoration:none; color:var(--charcoal); padding-bottom:4px; border-bottom:2px solid transparent;}
   .navlinks a:hover{border-bottom:2px solid var(--wsu-gold);}
@@ -135,12 +135,7 @@
   .reslib-section:last-child{margin-bottom:0;}
   .reslib-title{font-size:1.3rem; font-weight:900; color:var(--wsu-green-dark); margin:0 0 22px; padding-bottom:12px; border-bottom:3px solid var(--wsu-gold);}
 
-  /* credits */
-  .credits{background:#fff; border-top:1px solid var(--line);}
-  .credits .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px;}
-  .credits h4{margin:0 0 8px; font-size:.85rem; text-transform:uppercase; letter-spacing:.06em; color:var(--wsu-green-dark);}
-  .credits p{margin:0; font-size:.88rem; color:var(--warm-gray); max-width:36ch;}
-  .credits .names{font-size:.88rem; color:#3c3b36; line-height:1.9;}
+  /* footer */
 
   footer{background:var(--wsu-green-dark); color:#cfd6cf; padding:30px 0; font-size:.82rem;}
   footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px;}
@@ -160,7 +155,7 @@
 
 <nav>
   <div class="wrap">
-    <a href="#home" data-tab="home" class="brand" style="text-decoration:none;"><span class="mark">W</span> 7 Mile/Conant Action Plan</a>
+    <a href="#home" data-tab="home" class="brand" style="text-decoration:none;"><img src="assets/wsu-logo.png" alt="Wayne State University" class="mark"> 7 Mile/Conant Action Plan</a>
     <button class="navtoggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
     <ul class="navlinks" id="navLinks">
       <li><a href="#home" data-tab="home" class="active">Home</a></li>
@@ -276,12 +271,6 @@
         <p>City of Detroit funding for urgent health/safety repairs, including severe plumbing, active roof leaks, broken furnaces, and accessibility improvements, for low-income homeowners.</p>
         <span class="status">Notes conflict on status (closed pre-application vs. active). Confirm before referring residents.</span>
         <a href="https://detroitmi.gov/departments/housing-and-revitalization-department/homeowners/critical-home-repair-program" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
-      </div>
-      <div class="tool-card">
-        <span class="tag">Program</span>
-        <h4>Renew Detroit Home Repair Program</h4>
-        <p>Two-phase essential repair program specifically for senior and disabled Detroit homeowners, created by the Mayor's Office.</p>
-        <a href="https://detroitmi.gov/government/mayors-office/renew-detroit-home-repair-program" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
       </div>
       <div class="tool-card">
         <span class="tag">Fund</span>
@@ -401,7 +390,7 @@
         <span class="tag">Exemption</span>
         <h4>Disabled Veterans Property Tax Exemption</h4>
         <p>Disabled veterans (or unremarried surviving spouse) file Form 5107 with the City Assessor's Office.</p>
-        <a href="https://detroitmi.gov/sites/detroitmi.localhost/files/forms/2025-08/Form%205107%20-%20Affidavit%20for%20Disabled%20Veterans%20Exemption_rev%201124.pdf" class="link" target="_blank" rel="noopener">Form 5107 &rarr;</a>
+        <a href="https://www.michigan.gov/treasury/-/media/Project/Websites/treasury/Forms/Local-Government/PSD/STC/5107.pdf" class="link" target="_blank" rel="noopener">Form 5107 &rarr;</a>
       </div>
       <div class="tool-card">
         <span class="tag">Discount</span>
@@ -631,12 +620,6 @@
           <a href="https://detroitmi.gov/departments/housing-and-revitalization-department/homeowners/critical-home-repair-program" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
         </div>
         <div class="tool-card">
-          <span class="tag">Program</span>
-          <h4>Renew Detroit Home Repair Program</h4>
-          <p>Two-phase essential repair program specifically for senior and disabled Detroit homeowners, created by the Mayor's Office.</p>
-          <a href="https://detroitmi.gov/government/mayors-office/renew-detroit-home-repair-program" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
-        </div>
-        <div class="tool-card">
           <span class="tag">Fund</span>
           <h4>Detroit Home Repair Fund</h4>
           <p>Administered by Enterprise Community Partners, providing flexible funding for critical health/safety repairs for lower-income Detroit homeowners.</p>
@@ -754,7 +737,7 @@
           <span class="tag">Exemption</span>
           <h4>Disabled Veterans Property Tax Exemption</h4>
           <p>Disabled veterans (or unremarried surviving spouse) file Form 5107 with the City Assessor's Office.</p>
-          <a href="https://detroitmi.gov/sites/detroitmi.localhost/files/forms/2025-08/Form%205107%20-%20Affidavit%20for%20Disabled%20Veterans%20Exemption_rev%201124.pdf" class="link" target="_blank" rel="noopener">Form 5107 &rarr;</a>
+          <a href="https://www.michigan.gov/treasury/-/media/Project/Websites/treasury/Forms/Local-Government/PSD/STC/5107.pdf" class="link" target="_blank" rel="noopener">Form 5107 &rarr;</a>
         </div>
         <div class="tool-card">
           <span class="tag">Discount</span>
@@ -883,15 +866,6 @@
       </div>
     </div>
 
-  </div>
-</section>
-
-<section class="credits">
-  <div class="wrap">
-    <div>
-      <h4>About this plan</h4>
-      <p>Produced by Master of Urban Planning graduate students at Wayne State University, in partnership with Solomon Community Development Corporation.</p>
-    </div>
   </div>
 </section>
 
