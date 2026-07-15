@@ -137,6 +137,16 @@
   .reslib-section:last-child{margin-bottom:0;}
   .reslib-title{font-size:1.3rem; font-weight:900; color:var(--wsu-green-dark); margin:0 0 22px; padding-bottom:12px; border-bottom:3px solid var(--wsu-gold);}
 
+  .reslib-search{position:relative; max-width:440px; margin:0 0 42px;}
+  .reslib-search input{width:100%; padding:13px 42px 13px 40px; border:2px solid var(--line); border-radius:6px; font-family:inherit; font-size:.95rem; background:#fff; color:var(--charcoal);}
+  .reslib-search input::placeholder{color:var(--warm-gray);}
+  .reslib-search input:focus{outline:none; border-color:var(--wsu-green);}
+  .reslib-search .icon{position:absolute; left:13px; top:50%; transform:translateY(-50%); color:var(--warm-gray); font-size:.95rem; pointer-events:none;}
+  .reslib-search .clear-btn{position:absolute; right:6px; top:50%; transform:translateY(-50%); background:none; border:none; font-size:.85rem; line-height:1; color:var(--warm-gray); cursor:pointer; display:none; padding:8px; border-radius:50%;}
+  .reslib-search .clear-btn:hover{color:var(--wsu-green-dark); background:var(--sage);}
+  .reslib-search .clear-btn.show{display:block;}
+  .reslib-noresults{display:none; color:var(--warm-gray); font-style:italic; font-size:.95rem; padding:10px 0 30px;}
+
   /* footer */
 
   footer{background:var(--wsu-green-dark); color:#cfd6cf; padding:30px 0; font-size:.82rem;}
@@ -170,7 +180,7 @@
       <li><a href="#home" data-tab="home" class="active">Home</a></li>
       <li><a href="#housing" data-tab="housing">Housing</a></li>
       <li><a href="#commercial" data-tab="commercial">Commercial Corridor</a></li>
-      <li><a href="#blight" data-tab="blight">Blight &amp; Neighborhood Beautification</a></li>
+      <li><a href="#blight" data-tab="blight">Neighborhood Beautification</a></li>
       <li><a href="#resources" data-tab="resources">Resource Library</a></li>
     </ul>
   </div>
@@ -215,7 +225,7 @@
         <div class="howto-card-links">
           <a href="#housing" data-tab="housing">Housing</a>
           <a href="#commercial" data-tab="commercial">Commercial</a>
-          <a href="#blight" data-tab="blight">Neighborhood Beautification &amp; Blight</a>
+          <a href="#blight" data-tab="blight">Neighborhood Beautification</a>
         </div>
       </div>
       <a href="#resources" data-tab="resources" class="howto-card howto-card-link">
@@ -510,7 +520,7 @@
   </div>
 </section>
 
-<!-- ============ FOCUS AREA 3: BLIGHT & Neighborhood Beautification ============ -->
+<!-- ============ FOCUS AREA 3: Neighborhood Beautification ============ -->
 <section class="focus-area tab-panel" id="blight">
   <div class="wrap">
     <div class="fa-head">
@@ -518,7 +528,7 @@
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L7 9h2.5L6 15h3.5L7 20h10l-2.5-5H18l-3.5-6H17L12 2z"/><line x1="12" y1="20" x2="12" y2="22"/></svg>
       </div>
       <div class="fa-title">
-        <h2>Neighborhood Beautification &amp; Blight Reduction</h2>
+        <h2>Neighborhood Beautification</h2>
       </div>
     </div>
     <p class="fa-overview">The Conant and 7 Mile area is a stable stretch of neighborhood blocks, and that stability comes from neighborhood groups, community, and residents. Conditions of the area range widely, from blighted/boarded homes to well-kept properties. The corridor received 2,218 blight tickets between 2021 and 2025, mostly for overgrown vegetation, rental compliance, and waste management, and tree canopy coverage is below 25 percent across most of the neighborhoods. Residents raised concerns about flooding, limited street lighting, deteriorated sidewalks and roads, and a desire for stronger property maintenance standards so all property owners are held to the same standards. This work also supports Solomon Village CDC's proposed senior complex and townhomes at the former Mason Elementary site, and beautifying the surrounding blocks will benefit surrounding neighborhoods.</p>
@@ -587,6 +597,13 @@
       <h2>Every resource in the plan, in one place</h2>
       <p>The same resources found in each focus area's Toolbox tab, grouped here for quick reference.</p>
     </div>
+
+    <div class="reslib-search">
+      <span class="icon">🔍</span>
+      <input type="text" id="resSearchInput" placeholder="Search by program name, keyword, or category&hellip;" aria-label="Search resource library">
+      <button type="button" class="clear-btn" id="resSearchClear" aria-label="Clear search">✕</button>
+    </div>
+    <p class="reslib-noresults" id="resNoResults">No resources match your search. Try a different keyword.</p>
 
     <div class="reslib-section">
       <h3 class="reslib-title">Housing</h3>
@@ -800,7 +817,7 @@
     </div>
 
     <div class="reslib-section">
-      <h3 class="reslib-title">Blight &amp; Neighborhood Beautification</h3>
+      <h3 class="reslib-title">Neighborhood Beautification</h3>
       <div class="toolbox-grid">
         <div class="tool-card">
           <span class="tag">Grant</span>
@@ -900,6 +917,87 @@
       });
     });
   });
+  // Resource library live search (mirrors the Detroit 411 filter pattern)
+  (function(){
+    var input = document.getElementById('resSearchInput');
+    var clearBtn = document.getElementById('resSearchClear');
+    var noResults = document.getElementById('resNoResults');
+    if (!input) { return; }
+
+    // Related-term groups: typing any word/phrase in a group also pulls in cards
+    // containing the other terms in that group. Includes both planning-speak
+    // (e.g. "weatherization") and how a resident might actually search
+    // (e.g. "no heat", "cold house", "can't afford my gas bill").
+    var synonymGroups = [
+      ['heat','heating','furnace','furnaces','no heat','furnace broken','furnace broke','cold house','cant afford heat','can\'t afford heat','utilities','utility','energy','weatherization','dte','gas','gas bill','electric','electric bill','high gas bill','high electric bill','cooling','ac','air conditioning'],
+      ['repair','repairs','rehab','fix','fix my house','fix my roof','maintenance','plumbing','roof','roof leak','leaking roof','electrical','house falling apart','home repair help','free home repair','help fixing my house'],
+      ['loan','loans','financing','funding','grant','grants','fund','free money','help paying for repairs','home improvement loan'],
+      ['down payment','mortgage','homeownership','homebuyer','buy a home','buying a house','first time homebuyer','first-time homebuyer','help buying a house','closing costs'],
+      ['tenant','tenants','renter','renters','rental','eviction','eviction notice','lease','landlord','landlord wont fix','landlord won\'t fix','kicked out','notice to quit','cant pay rent','can\'t pay rent','slumlord','report my landlord','renters rights','section 8','housing voucher'],
+      ['tax','taxes','exemption','assessment','property tax','property tax too high','cant pay my taxes','can\'t pay my taxes','tax help','tax break'],
+      ['senior','seniors','elderly','aging','disability','disabled','veteran','veterans','senior discount','veteran discount','senior tax break','help for seniors'],
+      ['blight','vacant','vacant land','vacant house','abandoned','abandoned house','empty house','boarded up','boarded up house','eyesore','dumping','illegal dumping','someone dumped trash','trash','junk in yard','weeds','tall grass','overgrown','overgrown lot','lot','lots','side lot','empty lot','buy the lot next door','lot next door'],
+      ['business','businesses','commercial','corridor','storefront','empty store','vacant storefront','entrepreneur','start a business','open a shop','small business help','small business loan'],
+      ['zoning','rezoning','planning','permit','permits','building permit','change the zoning'],
+      ['legal','counsel','rights','fair housing','discrimination','housing discrimination','tenant rights','free lawyer','landlord discriminating','reasonable accommodation','wont let me have a ramp'],
+      ['lead','lead paint','leadsafe','health hazard','lead poisoning','lead test'],
+      ['animal','animal control','stray dog','loose dog','dog running loose','report a dog','dangerous dog'],
+      ['report a problem','pothole','streetlight out','graffiti','fallen tree','report to the city','city services','311']
+    ];
+
+    function expandQuery(q){
+      var terms = [q];
+      synonymGroups.forEach(function(group){
+        var groupMatches = group.some(function(term){ return term.indexOf(q) !== -1; });
+        if (groupMatches) {
+          group.forEach(function(term){
+            if (terms.indexOf(term) === -1) { terms.push(term); }
+          });
+        }
+      });
+      return terms;
+    }
+
+    function filterResources(){
+      var q = input.value.trim().toLowerCase();
+      clearBtn.classList.toggle('show', q.length > 0);
+      var terms = q === '' ? [''] : expandQuery(q);
+
+      var anyVisible = false;
+
+      document.querySelectorAll('#resources .toolbox-grid').forEach(function(grid){
+        var gridHasMatch = false;
+        grid.querySelectorAll('.tool-card').forEach(function(card){
+          var text = card.textContent.toLowerCase();
+          var match = q === '' || terms.some(function(term){ return text.indexOf(term) !== -1; });
+          card.style.display = match ? '' : 'none';
+          if (match) { gridHasMatch = true; anyVisible = true; }
+        });
+        grid.style.display = gridHasMatch ? '' : 'none';
+        var subhead = grid.previousElementSibling;
+        if (subhead && subhead.classList.contains('toolbox-subhead')) {
+          subhead.style.display = gridHasMatch ? '' : 'none';
+        }
+      });
+
+      document.querySelectorAll('#resources .reslib-section').forEach(function(sec){
+        var hasVisible = false;
+        sec.querySelectorAll('.toolbox-grid').forEach(function(grid){
+          if (grid.style.display !== 'none') { hasVisible = true; }
+        });
+        sec.style.display = hasVisible ? '' : 'none';
+      });
+
+      noResults.style.display = anyVisible ? 'none' : 'block';
+    }
+
+    input.addEventListener('input', filterResources);
+    clearBtn.addEventListener('click', function(){
+      input.value = '';
+      filterResources();
+      input.focus();
+    });
+  })();
 </script>
 
 </body>
