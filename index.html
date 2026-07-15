@@ -321,6 +321,13 @@
         <p>Federal (IRA-funded) rebates for home efficiency and electrification upgrades. New Detroit District applications are temporarily paused pending funding review. 855-510-7080.</p>
         <a href="https://mienergyrebates.clearesult.com/prequalificationapps/prequalification/v2" class="link" target="_blank" rel="noopener">mienergyrebates.clearesult.com &rarr;</a>
       </div>
+      <div class="tool-card">
+        <span class="tag">Program</span>
+        <h4>DWSD Lifeline H2O (Water Bill Assistance)</h4>
+        <p>Income-based water affordability program for DWSD account holders at or below 200% of the federal poverty level. Reduces a qualifying household's combined water, sewer, and drainage bill to a fixed $34/month, with shutoff protection while enrolled. Households not eligible or already carrying a past-due balance can ask about EasyPay instead. (313) 267-8000.</p>
+        <span class="status">Enrollment is currently full; the next application period is expected to open later in 2026. Sign up for a notification at lifeline.detroitmi.gov.</span>
+        <a href="https://detroitmi.gov/departments/water-and-sewerage-department/dwsd-customer-service/dwsd-here-help-water-assistance-programs/lifeline-plan" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
+      </div>
     </div>
 
     <div class="toolbox-subhead">Homeownership, Down Payment &amp; Foreclosure Prevention</div>
@@ -653,6 +660,13 @@
           <p>Federal (IRA-funded) rebates for home efficiency and electrification upgrades. New Detroit District applications are temporarily paused pending funding review. 855-510-7080.</p>
           <a href="https://mienergyrebates.clearesult.com/prequalificationapps/prequalification/v2" class="link" target="_blank" rel="noopener">mienergyrebates.clearesult.com &rarr;</a>
         </div>
+        <div class="tool-card">
+          <span class="tag">Program</span>
+          <h4>DWSD Lifeline H2O (Water Bill Assistance)</h4>
+          <p>Income-based water affordability program for DWSD account holders at or below 200% of the federal poverty level. Reduces a qualifying household's combined water, sewer, and drainage bill to a fixed $34/month, with shutoff protection while enrolled. Households not eligible or already carrying a past-due balance can ask about EasyPay instead. (313) 267-8000.</p>
+          <span class="status">Enrollment is currently full; the next application period is expected to open later in 2026. Sign up for a notification at lifeline.detroitmi.gov.</span>
+          <a href="https://detroitmi.gov/departments/water-and-sewerage-department/dwsd-customer-service/dwsd-here-help-water-assistance-programs/lifeline-plan" class="link" target="_blank" rel="noopener">detroitmi.gov &rarr;</a>
+        </div>
       </div>
 
       <div class="toolbox-subhead">Homeownership, Down Payment &amp; Foreclosure Prevention</div>
@@ -930,7 +944,7 @@
     // (e.g. "no heat", "cold house", "can't afford my gas bill").
     var synonymGroups = [
       ['heat','heating','furnace','furnaces','no heat','furnace broken','furnace broke','cold house','cant afford heat','can\'t afford heat','utilities','utility','energy','weatherization','dte','gas','gas bill','electric','electric bill','high gas bill','high electric bill','cooling','ac','air conditioning'],
-      ['repair','repairs','rehab','fix','fix my house','fix my roof','maintenance','plumbing','roof','roof leak','leaking roof','electrical','house falling apart','home repair help','free home repair','help fixing my house'],
+      ['repair','repairs','rehab','fix','fix my house','fix my roof','maintenance','plumbing','roof','roof leak','leaking roof','electrical','house falling apart','home repair help','free home repair','help fixing my house','water','water leak','water damage','no water','low water pressure','pipes','pipe'],
       ['loan','loans','financing','funding','grant','grants','fund','free money','help paying for repairs','home improvement loan'],
       ['down payment','mortgage','homeownership','homebuyer','buy a home','buying a house','first time homebuyer','first-time homebuyer','help buying a house','closing costs'],
       ['tenant','tenants','renter','renters','rental','eviction','eviction notice','lease','landlord','landlord wont fix','landlord won\'t fix','kicked out','notice to quit','cant pay rent','can\'t pay rent','slumlord','report my landlord','renters rights','section 8','housing voucher'],
@@ -945,8 +959,18 @@
       ['report a problem','pothole','streetlight out','graffiti','fallen tree','report to the city','city services','311']
     ];
 
+    function escapeRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+    // Whole-word/phrase match, so short terms like "ac" or "gas" only match
+    // that exact word and don't false-positive on words that merely contain
+    // those letters (e.g. "vacant", "Acquisition").
+    function wholeTermMatch(text, term){
+      var pattern = new RegExp('\\b' + escapeRegex(term) + '\\b', 'i');
+      return pattern.test(text);
+    }
+
     function expandQuery(q){
-      var terms = [q];
+      var terms = [];
       synonymGroups.forEach(function(group){
         var groupMatches = group.some(function(term){ return term.indexOf(q) !== -1; });
         if (groupMatches) {
@@ -961,7 +985,10 @@
     function filterResources(){
       var q = input.value.trim().toLowerCase();
       clearBtn.classList.toggle('show', q.length > 0);
-      var terms = q === '' ? [''] : expandQuery(q);
+      // Related terms pulled in by synonym groups (excludes the literal query,
+      // which is matched separately below with plain substring matching so
+      // partial typing like "furn" still works while you type).
+      var relatedTerms = q === '' ? [] : expandQuery(q);
 
       var anyVisible = false;
 
@@ -969,7 +996,9 @@
         var gridHasMatch = false;
         grid.querySelectorAll('.tool-card').forEach(function(card){
           var text = card.textContent.toLowerCase();
-          var match = q === '' || terms.some(function(term){ return text.indexOf(term) !== -1; });
+          var match = q === ''
+            || text.indexOf(q) !== -1
+            || relatedTerms.some(function(term){ return wholeTermMatch(text, term); });
           card.style.display = match ? '' : 'none';
           if (match) { gridHasMatch = true; anyVisible = true; }
         });
